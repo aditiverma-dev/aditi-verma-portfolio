@@ -7,82 +7,144 @@
 <meta name="description" content="Front-End Developer with 5+ years of experience building React and Redux applications for enterprise and government portals.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f3f6f4;--card:#fff;--ink:#14213d;--muted:#55627a;--line:#d9e1dd;--teal:#0f766e;--tealbg:#dff2ee;--saffron:#f2a93b;--r:14px}
-@media (prefers-color-scheme:dark){:root{--bg:#0e1626;--card:#152036;--ink:#eaf0fa;--muted:#9fb0cc;--line:#26344f;--teal:#4fd1c0;--tealbg:#123a3a}}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 "IBM Plex Sans",system-ui,sans-serif}
-h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.1;margin:0}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--saffron);outline-offset:3px}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;justify-content:space-between;align-items:center;height:58px}
-nav b{font-family:"Bricolage Grotesque",sans-serif;font-size:19px}
-nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:15px}
-nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--teal)}
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:84px 0 72px}
-.hero h1{font-size:clamp(46px,7vw,84px);font-weight:800;letter-spacing:-.03em}
-.role{font:700 22px "Bricolage Grotesque",sans-serif;color:var(--teal);margin:14px 0 18px}
-.hero p{max-width:52ch;color:var(--muted);margin:0 0 28px}
+:root{--bg:#0d1526;--bg2:#101b30;--card:#16223a;--line:#25344f;--ink:#e8eef9;--mut:#9aabc7;--blue:#5aa9ff;--amber:#ffb454;--mint:#5eead4;--r:12px;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.7 "IBM Plex Sans",system-ui,sans-serif}
+h1,h2,h3,.mono{font-family:var(--mono)}h1,h2,h3{margin:0;line-height:1.15}a{color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--blue);z-index:10}
+nav{position:sticky;top:0;z-index:9;background:rgba(13,21,38,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+nav b{font:700 16px var(--mono);color:var(--blue)}
+nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:0}
+nav a{display:block;padding:6px 11px;border-radius:8px;text-decoration:none;color:var(--mut);font:500 13px var(--mono)}
+nav a:hover,nav a.on{color:var(--ink);background:var(--card)}
+#burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:38px;height:38px;color:var(--ink);cursor:pointer;font-size:18px}
+@media (max-width:860px){
+  #burger{display:block}
+  nav ul{position:absolute;top:60px;left:0;right:0;flex-direction:column;gap:2px;background:var(--bg2);border-bottom:1px solid var(--line);padding:10px;display:none}
+  nav ul.open{display:flex}
+  nav a{padding:11px 14px}
+}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
+.reveal.show{opacity:1;transform:none}
+.hero{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding:88px 0 76px}
+.hero::before{content:"";position:absolute;top:-60px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(90,169,255,.18),transparent 70%);pointer-events:none;z-index:-1}
+nav a{position:relative;display:block;padding:6px 11px;border-radius:8px;text-decoration:none;color:var(--mut);font:500 13px var(--mono)}
+nav a::after{content:"";position:absolute;left:11px;right:11px;bottom:2px;height:2px;background:var(--blue);transform:scaleX(0);transition:transform .2s}
+nav a:hover,nav a.on{color:var(--ink)}
+nav a.on::after{transform:scaleX(1)}
+.tl>li{position:relative;padding-bottom:34px;transition:transform .2s}
+.tl>li:hover{transform:translateX(3px)}
+.status{display:inline-flex;gap:9px;align-items:center;font:500 13px var(--mono);color:var(--mint);border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin-bottom:22px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px rgba(94,234,212,.18)}
+.hero h1{font-size:clamp(40px,6vw,68px);font-weight:700;letter-spacing:-.04em}
+.hero h1 span{color:var(--blue)}
+.hero .lead{font-size:19px;color:var(--mut);max-width:50ch;margin:20px 0 30px}
 .btns{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--ink)}
-.btn.p{background:var(--ink);color:var(--bg)}.btn:hover{transform:translateY(-2px)}
-.btn{transition:transform .15s}
-.demo{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:0 14px 40px rgba(20,33,61,.12)}
-.demo h3{font-size:18px;margin-bottom:4px}.demo small{color:var(--muted)}
-.hl{list-style:none;margin:18px 0 0;padding:0}.hl li{padding:13px 0;border-top:1px solid var(--line)}.hl b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:18px}.hl span{color:var(--muted);font-size:15px}
-section{padding:64px 0;border-top:1px solid var(--line)}
-h2{font-size:clamp(30px,4vw,44px);margin-bottom:28px;letter-spacing:-.02em}
-.job{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;align-items:baseline}
-.job h3{font-size:24px}.when{color:var(--muted);font-size:15px}
-.sub{color:var(--muted);margin:2px 0 16px}
-ul.pts{margin:0;padding-left:20px}ul.pts li{margin-bottom:9px;max-width:78ch}
-.proj{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px}
-.card.feat{grid-row:span 2;border-left:6px solid var(--saffron)}
-.card h3{font-size:22px;margin-bottom:2px}.card p{margin:10px 0 0;color:var(--muted);font-size:16px}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font:600 14px var(--mono);text-decoration:none;border:1px solid var(--line);background:var(--card);cursor:pointer;color:var(--ink);transition:transform .15s,border-color .15s}
+.btn.p{background:var(--blue);border-color:var(--blue);color:#06101f}
+.btn:hover{transform:translateY(-2px);border-color:var(--blue)}
+.pcard{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 20px 50px rgba(0,0,0,.4);overflow:hidden}
+.pcard .top{display:flex;gap:7px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);font:500 12px var(--mono);color:var(--mut)}
+.pcard .top i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.pcard dl{margin:0;padding:6px 20px}
+.pcard .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);animation:fade .5s both;animation-delay:calc(var(--i)*.09s)}
+.pcard .row:last-child{border-bottom:none}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}}
+.pcard dt{flex:0 0 118px;font:500 12px var(--mono);color:var(--mut);text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.pcard dd{margin:0;font-size:15px}
+.pcard .yes{display:inline-flex;align-items:center;gap:6px;color:var(--mint);font:600 13px var(--mono)}
+.pcard .yes::before{content:"✓";display:inline-flex;width:16px;height:16px;border-radius:50%;background:rgba(94,234,212,.15);align-items:center;justify-content:center;font-size:10px}
+section{padding:72px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(26px,3.6vw,38px);letter-spacing:-.03em;margin-bottom:10px}
+.intro{color:var(--mut);max-width:62ch;margin:0 0 32px}
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:32px}
+.stats{display:grid;gap:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px}
+.stat b{font:700 22px var(--mono);color:var(--amber);display:block}.stat span{color:var(--mut);font-size:15px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.job{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;align-items:baseline}
+.job h3{font-size:20px}.when{font:500 13px var(--mono);color:var(--amber)}
+.sub{color:var(--mut);margin:4px 0 14px;font-size:15px}
+ul.pts{margin:0;padding-left:20px}ul.pts li{margin-bottom:9px;max-width:80ch}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.tags span{background:var(--tealbg);color:var(--teal);border-radius:999px;padding:4px 12px;font-size:14px;font-weight:500}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.two h3,.three h3{font-size:20px;margin-bottom:6px}
-.three{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.three p{margin:4px 0 0;color:var(--muted);font-size:16px}
-.contact{text-align:center}.contact p{color:var(--muted);max-width:50ch;margin:0 auto 26px}
-.contact .btns{justify-content:center}
-footer{padding:28px 0 40px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
-@media (max-width:820px){.hero,.proj,.two,.three{grid-template-columns:1fr}.card.feat{grid-row:auto}nav ul{gap:14px;font-size:14px}.hero{padding:52px 0}}
-@media (max-width:520px){nav ul li:nth-child(n+4){display:none}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.tags span{font:500 13px var(--mono);color:var(--blue);background:rgba(90,169,255,.1);border:1px solid rgba(90,169,255,.25);border-radius:8px;padding:4px 10px}
+.tl{list-style:none;margin:0;padding:0 0 0 26px;border-left:2px solid var(--line)}
+.tl>li{position:relative;padding-bottom:34px}.tl>li:last-child{padding-bottom:0}
+.tl>li::before{content:"";position:absolute;left:-35px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--blue)}
+.tl p{color:var(--mut);margin:6px 0 0;max-width:70ch}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.grid.one{grid-template-columns:1fr}
+.grid .card{padding:20px;transition:transform .2s,border-color .2s}
+.grid .card:hover{transform:translateY(-3px);border-color:var(--blue)}
+.grid h3{font-size:16px;color:var(--ink);margin-bottom:6px}.grid p{margin:0;font-size:15px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tabs button{font:500 13px var(--mono);color:var(--mut);background:transparent;border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--blue);border-color:var(--blue);color:#06101f}
+.panel[hidden]{display:none}.panel .tags{margin:0}.panel .tags span{font-size:15px;padding:8px 14px}
+.awards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.awards .card{transition:transform .2s,border-color .2s}
+.awards .card:hover{transform:translateY(-4px);border-color:var(--amber)}
+.awards .ic{width:38px;height:38px;border-radius:10px;background:rgba(255,180,84,.12);border:1px solid rgba(255,180,84,.3);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px}
+.awards h3{font-size:17px;margin-bottom:4px}.awards p{margin:0;color:var(--mut);font-size:14.5px;line-height:1.6}.awards .when{display:block;margin-bottom:10px}
+.contact{text-align:center}.contact .intro{margin:0 auto 28px}.contact .btns{justify-content:center}
+footer{padding:26px 0 40px;text-align:center;color:var(--mut);font:500 13px var(--mono);border-top:1px solid var(--line)}
+@media (max-width:860px){.hero,.two,.grid{grid-template-columns:1fr}.awards{grid-template-columns:1fr 1fr}.hero{padding:52px 0}nav ul{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<nav><div class="wrap"><b>Aditi Verma</b>
-<ul><li><a href="#experience">Experience</a></li><li><a href="#projects">Projects</a></li><li><a href="#skills">Skills</a></li><li><a href="#awards">Awards</a></li><li><a href="#contact">Contact</a></li></ul></div></nav>
+<div id="bar"></div>
+<nav><div class="wrap"><b>aditi.verma</b>
+<button id="burger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+<ul id="navlist"><li><a href="#about">About</a></li><li><a href="#experience">Experience</a></li><li><a href="#projects">Projects</a></li><li><a href="#skills">Skills</a></li><li><a href="#awards">Awards</a></li><li><a href="#education">Education</a></li><li><a href="#contact">Contact</a></li></ul></div></nav>
 
 <main class="wrap">
 <header class="hero">
 <div>
-<h1>Aditi Verma</h1>
-<div class="role">Front-End Developer</div>
-<p>I build responsive, dependable web applications with React and Redux. Over 5+ years I have worked on enterprise and government portals, from a UK telecom's internal tools to India's National Single Window System.</p>
-<div class="btns"><a class="btn p" href="Aditi_Verma_Resume.pdf" download>Download resume</a><a class="btn" href="#contact">Get in touch</a></div>
+<div class="status"><i></i>Open to new roles</div>
+<h1>Hi, I'm <span>Aditi Verma</span>.<br>I build front ends that scale.</h1>
+<p class="lead">Front-End Developer with 5+ years of experience in React and Redux, shipping responsive applications for enterprise and government portals.</p>
+<div class="btns"><a class="btn p" href="Aditi_Verma_Resume.pdf" download>Download resume</a></div>
 </div>
-<aside class="demo" aria-label="Recent highlights">
-<h3>Recent highlights</h3><small>National Single Window System (NSWS)</small>
-<ul class="hl">
-<li><b>Amendment Framework</b><span>Built from scratch, now used by multiple ministries.</span></li>
-<li><b>DigiLocker integration</b><span>Secure document verification on the portal.</span></li>
-<li><b>Platform revamp</b><span>Modernized the UI across the platform.</span></li>
-</ul>
-</aside>
+<div class="pcard" aria-label="Profile summary">
+<div class="top"><i></i><i></i><i></i><span style="margin-left:8px">profile.txt</span></div>
+<dl>
+<div class="row" style="--i:1"><dt>Role</dt><dd>Front-End Developer</dd></div>
+<div class="row" style="--i:2"><dt>Experience</dt><dd>5+ years</dd></div>
+<div class="row" style="--i:3"><dt>Company</dt><dd>Tata Consultancy Services</dd></div>
+<div class="row" style="--i:4"><dt>Core stack</dt><dd>React, Redux, TypeScript</dd></div>
+<div class="row" style="--i:5"><dt>Builds</dt><dd>Government &amp; enterprise portals</dd></div>
+<div class="row" style="--i:6"><dt>Workflow</dt><dd>Uses AI tools like Claude to move faster</dd></div>
+<div class="row" style="--i:7"><dt>Status</dt><dd><span class="yes">Open to work</span></dd></div>
+</dl>
+</div>
 </header>
+
+<section id="about">
+<h2>About</h2>
+<div class="two">
+<div>
+<p>I am a front-end developer at Tata Consultancy Services, where I build and maintain dynamic, responsive web applications with React.js, Redux, JavaScript, HTML and CSS. I care about interfaces that stay consistent across devices and code that stays easy to change as products grow.</p>
+<p>Most of my work is on large portals used by many teams, so I lean on reusable components, centralized state management and clean API integration. I work closely with backend developers, QA and business analysts in Agile teams, and I use AI tools such as Claude to speed up code reviews, debugging and scaffolding.</p>
+</div>
+<div class="stats">
+<div class="stat reveal"><b>5+ years</b><span>Building web applications</span></div>
+<div class="stat reveal"><b>3 projects</b><span>NSWS, British Telecom, TCS Ignite</span></div>
+<div class="stat reveal"><b>3 awards</b><span>Best Team and Elevate Wings at TCS</span></div>
+</div>
+</div>
+</section>
 
 <section id="experience">
 <h2>Experience</h2>
-<div class="job"><h3>Front-End Developer, Tata Consultancy Services</h3><span class="when">Jan 2021 – Present · Noida</span></div>
-<p class="sub">Official designation: System Engineer</p>
+<div class="card reveal">
+<div class="job"><h3>Front-End Developer, Tata Consultancy Services</h3><span class="when">Jan 2021 – Present</span></div>
+<p class="sub">Noida, India · Official designation: System Engineer</p>
 <ul class="pts">
 <li>Develop and maintain dynamic, responsive web applications with React.js, JavaScript, HTML and CSS that work across devices and screen sizes.</li>
 <li>Use Redux for centralized state management, keeping data flow consistent as applications grow.</li>
@@ -91,58 +153,96 @@ footer{padding:28px 0 40px;text-align:center;color:var(--muted);font-size:14px;b
 <li>Work with backend developers, QA and business analysts in Agile teams, using JIRA for sprint tracking and GitLab for version control.</li>
 <li>Debug front-end issues with browser developer tools, and use AI tools such as Claude to speed up code review, debugging and component scaffolding.</li>
 </ul>
+</div>
 </section>
 
 <section id="projects">
 <h2>Projects</h2>
-<div class="proj">
-<article class="card feat">
-<div class="job"><h3>National Single Window System (NSWS)</h3><span class="when">Sep 2022 – Present</span></div>
-<p>A government portal overseen by TCS, with separate Ministry and Investor portals. I build enhancements and meet Ministry requirements on the front end.</p>
-<ul class="pts" style="margin-top:14px">
-<li>Integrated DigiLocker verification for secure, real-time document authentication.</li>
-<li>Designed and built the Amendment Framework from scratch. Multiple ministries on the platform now use it to manage post-approval changes.</li>
-<li>Worked on the full platform revamp, modernizing the UI and improving performance and maintainability.</li>
-</ul>
-<div class="tags"><span>React</span><span>Redux</span><span>JavaScript</span><span>Axios</span></div>
-</article>
-<article class="card">
-<div class="job"><h3>British Telecom</h3><span class="when">Jun 2021 – Sep 2022</span></div>
-<p>Built internal trackers for a UK-based client to manage and monitor service request statuses.</p>
-<div class="tags"><span>React.js</span><span>JavaScript</span><span>HTML</span><span>CSS</span></div>
-</article>
-<article class="card">
-<div class="job"><h3>TCS Ignite</h3><span class="when">Jan – Jun 2021</span></div>
-<p>Foundation training in JavaScript, Python, Machine Learning, Java and DevOps.</p>
-</article>
+<p class="intro">The projects I have worked on at TCS, in the order they happened.</p>
+<ol class="tl">
+<li class="reveal"><div class="job"><h3>TCS Ignite</h3><span class="when">Jan – Jun 2021</span></div>
+<p>Foundation training program covering JavaScript, Python, Machine Learning, Java and DevOps.</p></li>
+<li class="reveal"><div class="job"><h3>British Telecom</h3><span class="when">Jun 2021 – Sep 2022</span></div>
+<p>Enhanced the daily operational tools of a UK-based client. I built internal trackers to manage and monitor service request statuses.</p>
+<div class="grid one">
+<div class="card reveal"><h3>Application tracking portal</h3><p>Developed a tracking portal for application tracking and allocating unassigned tasks to users, along with checking the current status of each application.</p></div>
 </div>
+<div class="tags"><span>React.js</span><span>JavaScript</span><span>HTML</span><span>CSS</span></div></li>
+<li class="reveal"><div class="job"><h3>National Single Window System (NSWS)</h3><span class="when">Sep 2022 – Present</span></div>
+<p>A government portal overseen by TCS, made up of a Ministry portal and an Investor portal. I work on the front end, building enhancements and meeting Ministry requirements.</p>
+<div class="grid">
+<div class="card reveal"><h3>DigiLocker integration</h3><p>Integrated DigiLocker verification into the portal for secure, real-time document authentication, reducing manual verification effort.</p></div>
+<div class="card reveal"><h3>Amendment Framework</h3><p>Designed and built from scratch as a reusable module. Multiple ministries on the platform now use it to manage post-approval changes.</p></div>
+<div class="card reveal"><h3>Platform revamp</h3><p>Worked on the full revamp of the platform, modernizing the UI and improving performance and maintainability.</p></div>
+<div class="card reveal"><h3>Ministry requirements</h3><p>Delivered feature enhancements for the Ministry portal, applying efficient data structures for better performance.</p></div>
+</div>
+<div class="tags"><span>React</span><span>Redux</span><span>JavaScript</span><span>Axios</span></div></li>
+</ol>
 </section>
 
 <section id="skills">
 <h2>Skills and tools</h2>
-<div class="two">
-<div class="card"><h3>Skills</h3><div class="tags"><span>React.js</span><span>Redux</span><span>JavaScript</span><span>TypeScript</span><span>HTML5</span><span>CSS3</span><span>SCSS</span><span>Axios / REST APIs</span><span>Bootstrap</span><span>Responsive design</span><span>Python</span><span>AI-assisted development</span></div></div>
-<div class="card"><h3>Tools</h3><div class="tags"><span>Git</span><span>GitLab</span><span>SVN</span><span>JIRA</span><span>Browser developer tools</span><span>VS Code</span></div></div>
-</div>
+<p class="intro">Pick a category to see what I work with.</p>
+<div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" data-p="p1">Front end</button><button role="tab" aria-selected="false" data-p="p2">Data and APIs</button><button role="tab" aria-selected="false" data-p="p3">Tools</button><button role="tab" aria-selected="false" data-p="p4">Also</button></div>
+<div class="panel" id="p1"><div class="tags"><span>React.js</span><span>Redux</span><span>JavaScript</span><span>TypeScript</span><span>HTML5</span><span>CSS3</span><span>SCSS</span><span>Bootstrap</span><span>Responsive design</span></div></div>
+<div class="panel" id="p2" hidden><div class="tags"><span>Axios</span><span>REST API integration</span><span>State management</span><span>Data structures</span></div></div>
+<div class="panel" id="p3" hidden><div class="tags"><span>Git</span><span>GitLab</span><span>SVN</span><span>JIRA</span><span>Browser developer tools</span><span>VS Code</span></div></div>
+<div class="panel" id="p4" hidden><div class="tags"><span>Python</span><span>AI-assisted development (Claude)</span><span>Agile teams</span></div></div>
 </section>
 
 <section id="awards">
-<h2>Awards and education</h2>
-<div class="three">
-<div class="card"><h3>Best Team Award</h3><p>Tata Consultancy Services, 2024 and 2025</p></div>
-<div class="card"><h3>Elevate Wings Award</h3><p>Tata Consultancy Services, 2023 and 2024</p></div>
-<div class="card"><h3>Master of Computer Applications</h3><p>SASTRA University, 8.44 GPA</p><p>Bachelor of Computer Applications, IMS UC Ghaziabad, 75%</p></div>
+<h2>Awards</h2>
+<p class="intro">Recognition from Tata Consultancy Services, tied to the NSWS work above.</p>
+<div class="awards">
+<div class="card reveal"><div class="ic">🏆</div><span class="when">2025</span><h3>Best Team Award</h3><p>Given to the NSWS front-end team for delivering the platform revamp and keeping the portal stable through the rollout.</p></div>
+<div class="card reveal"><div class="ic">🏆</div><span class="when">2024</span><h3>Best Team Award</h3><p>Recognized for shipping the Amendment Framework and DigiLocker integration on schedule as a team.</p></div>
+<div class="card reveal"><div class="ic">🚀</div><span class="when">2023</span><h3>Elevate Wings Award</h3><p>Elevate Wings is TCS's internal assessment for upskilling associates. Clearing it moves you up a grade band and into TCS Digital roles.</p></div>
+</div>
+</section>
+
+<section id="education">
+<h2>Education</h2>
+<div class="two">
+<div>
+<ol class="tl">
+<li class="reveal"><div class="job"><h3>Master of Computer Applications</h3><span class="when">Feb 2021 – Apr 2023</span></div><p>SASTRA University · 8.44 GPA</p></li>
+<li class="reveal"><div class="job"><h3>Bachelor of Computer Applications</h3><span class="when">Aug 2017 – Sep 2020</span></div><p>IMS UC, Ghaziabad · 75%</p></li>
+</ol>
+</div>
+<div class="stats">
+<div class="stat reveal"><b>Languages</b><span>English and Hindi, native or bilingual</span></div>
+<div class="stat reveal"><b>Beyond work</b><span>Volunteering, outdoor sports, cooking and baking, traveling, gym, gardening</span></div>
+</div>
 </div>
 </section>
 
 <section id="contact" class="contact">
-<h2>Let's talk</h2>
-<p>I am open to new front-end and React roles. Email me or connect on LinkedIn.</p>
-<div class="btns"><a class="btn p" href="mailto:aditi19998verma@gmail.com">Email me</a><a class="btn" href="https://linkedin.com/in/aditi-verma19998" target="_blank" rel="noopener">LinkedIn</a></div>
+<h2>Let's work together</h2>
+<p class="intro">I am open to new front-end and React roles. Send me an email or connect on LinkedIn.</p>
+<div class="btns"><a class="btn p" href="mailto:aditi19998verma@gmail.com">Email me</a><button class="btn" id="copy" type="button">Copy email</button><a class="btn" href="https://linkedin.com/in/aditi-verma19998" target="_blank" rel="noopener">LinkedIn</a><a class="btn" href="Aditi_Verma_Resume.pdf" download>Resume</a></div>
 </section>
 </main>
 <footer>© <span id="y"></span> Aditi Verma · Ghaziabad, India</footer>
 
-<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+var bar=document.getElementById('bar');
+addEventListener('scroll',function(){var h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+var links=[].slice.call(document.querySelectorAll('nav a'));
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id);});}});},{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section').forEach(function(s){io.observe(s);});
+var burger=document.getElementById('burger'),navlist=document.getElementById('navlist');
+burger.addEventListener('click',function(){var open=navlist.classList.toggle('open');burger.setAttribute('aria-expanded',open);});
+links.forEach(function(a){a.addEventListener('click',function(){navlist.classList.remove('open');burger.setAttribute('aria-expanded','false');});});
+var revEls=[].slice.call(document.querySelectorAll('.reveal'));
+if('IntersectionObserver' in window){
+  var rio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');rio.unobserve(e.target);}});},{threshold:.15});
+  revEls.forEach(function(el){rio.observe(el);});
+}else{revEls.forEach(function(el){el.classList.add('show');});}
+var tabs=[].slice.call(document.querySelectorAll('.tabs button'));
+tabs.forEach(function(b){b.addEventListener('click',function(){tabs.forEach(function(t){t.setAttribute('aria-selected',t===b);document.getElementById(t.dataset.p).hidden=t!==b;});});});
+document.getElementById('copy').addEventListener('click',function(){var b=this;navigator.clipboard.writeText('aditi19998verma@gmail.com').then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy email';},1800);});});
+</script>
 </body>
 </html>
